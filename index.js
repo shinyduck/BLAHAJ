@@ -2,6 +2,11 @@ const fs = require('fs');
 const { Client, Intents, Collection } = require('discord.js');
 const { token } = require('./config.json');
 
+/*
+//Using dotenv
+const dotenv = require('dotenv').config();
+*/
+
 // Create a new client instance
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS,
@@ -48,6 +53,6 @@ client.on('interactionCreate', async interaction => {
 client.login(token)
 
 /*
-Using dotenv
+//Using dotenv
 client.login(process.env.TOKEN)
 */
