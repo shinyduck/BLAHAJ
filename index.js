@@ -7,7 +7,6 @@ const { token } = require('./config.json');
 const dotenv = require('dotenv').config();
 */
 
-// Create a new client instance
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS,
 	Intents.FLAGS.GUILD_MESSAGES, 
@@ -30,8 +29,6 @@ for (const file of eventFiles) {
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
 
