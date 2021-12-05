@@ -6,9 +6,9 @@ const { fortuneSlipEmbed } = require('../fortuneslipembeds');
 // Create new empty variable called 'claimeddailyfortuneslip'
 var claimeddailyfortuneslip = new Set();
 
-// schedule dailyfortuneslipreset reset At 04:00 (0 4 * * *) CRON GMT+8 corresponding to Genshin Impact daily asia server reset
+// schedule dailyfortuneslipreset reset At 04:00 (0 4 * * *) CRON GMT+8 corresponding to Genshin Impact daily Asia server reset
 const dailyfortuneslipreset = Cron(
-	'* 4 * * *', 
+	'0 4 * * *', 
 	{ 
 		maxRuns: Infinity, 
 		timezone: "Asia/Singapore"
@@ -19,9 +19,6 @@ const dailyfortuneslipreset = Cron(
 	}
 );
 
-// turning dailyfortuneslipreset.next() string into an inline code block
-const inlinenextdailyfortuneslipreset = inlineCode(dailyfortuneslipreset.next());
-
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('fortuneslip')
@@ -29,7 +26,7 @@ module.exports = {
     async execute(interaction) {
         if (claimeddailyfortuneslip.has(interaction.user.id)) {
             interaction.reply({
-                content: `You've already gotten one today. Please try again tomorrow... ${interaction.user}\nNext reset at: ${inlinenextdailyfortuneslipreset}`,
+                content: `You've already gotten one today. Please try again tomorrow... ${interaction.user} [**${msToHoursMinutesAndSeconds(dailyfortuneslipreset.msToNext())}**] till next reset\nNext reset at: ${inlineCode(dailyfortuneslipreset.next())}`,
                 ephemeral: true,
             });
         } else {
@@ -38,4 +35,18 @@ module.exports = {
             claimeddailyfortuneslip.add(interaction.user.id);
         }
     },
+}
+
+function msToHoursMinutesAndSeconds(ms){
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    //const day = hour * 24;
+    
+    let seconds = Math.floor(ms / second % 60);
+    let minutes = Math.floor(ms / minute % 60);
+    let hours = Math.floor(ms / hour % 24);
+    //let days = Math.floor(ms / day);
+    
+    return  hours + "h " + minutes + "m " + seconds + "s";
 }
