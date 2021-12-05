@@ -27,10 +27,19 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
 (async () => {
 	try {
+		// Registering Guild commands
 		await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
 		);
+		
+		/*
+		// Registering Global commands
+		await rest.put(
+			Routes.applicationCommands(clientId),
+			{ body: commands },
+		);
+		*/
 
 		console.log('Successfully registered application commands.');
 	} catch (error) {
@@ -42,10 +51,19 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 //Using dotenv
 (async () => {
 	try {
+		// Registering Guild commands
 		await rest.put(
 			Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
 			{ body: commands },
 		);
+		
+		/*
+		// Registering Global commands
+		await rest.put(
+			Routes.applicationCommands(process.env.CLIENT_ID),
+			{ body: commands },
+		);
+		*/
 
 		console.log('Successfully registered application commands.');
 	} catch (error) {
