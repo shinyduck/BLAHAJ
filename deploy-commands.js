@@ -57,13 +57,13 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 			{ body: commands },
 		);
 		
-		/*
+		
 		// Registering Global commands
-		await rest.put(
-			Routes.applicationCommands(process.env.CLIENT_ID),
-			{ body: commands },
-		);
-		*/
+		//await rest.put(
+			//Routes.applicationCommands(process.env.CLIENT_ID),
+			//{ body: commands },
+		//);
+		
 
 		console.log('Successfully registered application commands.');
 	} catch (error) {
