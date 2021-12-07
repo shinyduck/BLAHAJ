@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
+// Using api from https://api-fg.ddns.net/
 
 module.exports = {
     data: new SlashCommandBuilder()
