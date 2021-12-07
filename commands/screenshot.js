@@ -9,16 +9,15 @@ module.exports = {
 
     async execute(interaction) {
 
-        const urls = interaction.options.getString('url');
-        const site = /^(https?:\/\/)/i.test(urls) ? urls : `http://${urls}`;
+        const url = interaction.options.getString('url');
 
         try {
             const searchEmbed = new MessageEmbed()
                 .setColor('RANDOM')
-                .setTitle(`Screenshot from: *${site}*`)
-                .setImage(`https://api-fg.ddns.net/api/v3/news/screenshot?url=${site}`)
+                .setTitle(`Screenshot from: *${url}*`)
+                .setImage(`https://api-fg.ddns.net/api/v3/news/screenshot?url=${url}`)
 
-            console.log(`${interaction.user.tag} in #${interaction.channel.name} screenshotted ${urls} and got ${site}.`);
+            console.log(`${interaction.user.tag} in #${interaction.channel.name} screenshotted ${url}`);
             return interaction.reply({ embeds: [searchEmbed] });
         
         } catch (err) {
